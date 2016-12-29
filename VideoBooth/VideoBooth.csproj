@@ -155,6 +155,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dlls\Microsoft.Expression.Encoder.Api2.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.Types.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.Utilities.dll" />
