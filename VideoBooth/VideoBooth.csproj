@@ -34,19 +34,19 @@
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Encoder, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Microsoft.Expression.Encoder.dll</HintPath>
+      <HintPath>dlls\Microsoft.Expression.Encoder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Encoder.Types, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Microsoft.Expression.Encoder.Types.dll</HintPath>
+      <HintPath>dlls\Microsoft.Expression.Encoder.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Encoder.Utilities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Microsoft.Expression.Encoder.Utilities.dll</HintPath>
+      <HintPath>dlls\Microsoft.Expression.Encoder.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="SharpZipLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\SharpZipLib.dll</HintPath>
+      <HintPath>dlls\SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -155,10 +155,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Microsoft.Expression.Encoder.dll" />
-    <Content Include="bin\Debug\Microsoft.Expression.Encoder.Types.dll" />
-    <Content Include="bin\Debug\Microsoft.Expression.Encoder.Utilities.dll" />
-    <Content Include="bin\Debug\SharpZipLib.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.Types.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.Utilities.dll" />
+    <Content Include="dlls\SharpZipLib.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
