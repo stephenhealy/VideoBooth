@@ -156,10 +156,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dlls\Microsoft.Expression.Encoder.Api2.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.CommonUI.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.CoreUI.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.EEScreen.Codec.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.EEScreen.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.EncoderUI.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.Project.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.Types.dll" />
     <Content Include="dlls\Microsoft.Expression.Encoder.Utilities.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.Utilities2.dll" />
+    <Content Include="dlls\Microsoft.Expression.Encoder.UtilitiesUI.dll" />
+    <Content Include="dlls\Microsoft.Expression.Extensibility.dll" />
+    <Content Include="dlls\Microsoft.Expression.Framework.dll" />
+    <Content Include="dlls\Microsoft.Expression.LicenseInstaller.dll" />
+    <Content Include="dlls\Microsoft.Expression.Licensing.dll" />
+    <Content Include="dlls\Microsoft.Windows.Design.Extensibility.dll" />
+    <Content Include="dlls\Microsoft.Windows.Design.Interaction.dll" />
     <Content Include="dlls\SharpZipLib.dll" />
   </ItemGroup>
   <ItemGroup>
