@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LocalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Video" Type="bit" Nullable="false" />
+          <Property Name="Occurs" Type="datetime" Nullable="false" />
+          <Property Name="Started" Type="datetime" />
+          <Property Name="Completed" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Fields">
+          <Key>
+            <PropertyRef Name="FieldID" />
+          </Key>
+          <Property Name="FieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequiredID" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Read" Type="bit" Nullable="false" />
+          <Property Name="Write" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requirements">
+          <Key>
+            <PropertyRef Name="RequiredID" />
+          </Key>
+          <Property Name="RequiredID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Question" Type="varchar(max)" />
+          <Property Name="Display" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Responses">
+          <Key>
+            <PropertyRef Name="ResponseID" />
+          </Key>
+          <Property Name="ResponseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="Path" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Submissions">
+          <Key>
+            <PropertyRef Name="SubmissionID" />
+          </Key>
+          <Property Name="SubmissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Started" Type="datetime" Nullable="false" />
+          <Property Name="Finished" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="TemplateID" />
+          </Key>
+          <Property Name="TemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Video" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TextQuestions">
+          <Key>
+            <PropertyRef Name="TextQuestionID" />
+          </Key>
+          <Property Name="TextQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Question" Type="varchar(max)" />
+          <Property Name="WorkflowButtonID" Type="int" Nullable="false" />
+          <Property Name="Display" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VideoQuestions">
+          <Key>
+            <PropertyRef Name="VideoQuestionID" />
+          </Key>
+          <Property Name="VideoQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TextQuestionID" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="Path" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="WorkflowButtons">
+          <Key>
+            <PropertyRef Name="WorkflowButtonID" />
+          </Key>
+          <Property Name="WorkflowButtonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowQuestionID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Text" Type="varchar" MaxLength="100" />
+          <Property Name="NextWorkflowQuestionID" Type="int" Nullable="false" />
+          <Property Name="Display" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowQuestions">
+          <Key>
+            <PropertyRef Name="WorkflowQuestionID" />
+          </Key>
+          <Property Name="WorkflowQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Question" Type="varchar(max)" />
+          <Property Name="Timeout" Type="int" Nullable="false" />
+          <Property Name="Display" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflows">
+          <Key>
+            <PropertyRef Name="WorkflowID" />
+          </Key>
+          <Property Name="WorkflowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowQuestionID" Type="int" Nullable="false" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="LocalModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fields" EntityType="Self.Fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requirements" EntityType="Self.Requirements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responses" EntityType="Self.Responses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Submissions" EntityType="Self.Submissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Templates" EntityType="Self.Templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TextQuestions" EntityType="Self.TextQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VideoQuestions" EntityType="Self.VideoQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowButtons" EntityType="Self.WorkflowButtons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowQuestions" EntityType="Self.WorkflowQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflows" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="LocalModel.Event" />
+          <EntitySet Name="Fields" EntityType="LocalModel.Field" />
+          <EntitySet Name="Logins" EntityType="LocalModel.Login" />
+          <EntitySet Name="Requirements" EntityType="LocalModel.Requirement" />
+          <EntitySet Name="Responses" EntityType="LocalModel.Respons" />
+          <EntitySet Name="Submissions" EntityType="LocalModel.Submission" />
+          <EntitySet Name="Templates" EntityType="LocalModel.Template" />
+          <EntitySet Name="TextQuestions" EntityType="LocalModel.TextQuestion" />
+          <EntitySet Name="VideoQuestions" EntityType="LocalModel.VideoQuestion" />
+          <EntitySet Name="WorkflowButtons" EntityType="LocalModel.WorkflowButton" />
+          <EntitySet Name="WorkflowQuestions" EntityType="LocalModel.WorkflowQuestion" />
+          <EntitySet Name="Workflows" EntityType="LocalModel.Workflow" />
+        </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Video" Type="Boolean" Nullable="false" />
+          <Property Name="Occurs" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Started" Type="DateTime" Precision="3" />
+          <Property Name="Completed" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="FieldID" />
+          </Key>
+          <Property Name="FieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequiredID" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Read" Type="Boolean" Nullable="false" />
+          <Property Name="Write" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requirement">
+          <Key>
+            <PropertyRef Name="RequiredID" />
+          </Key>
+          <Property Name="RequiredID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Display" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Respons">
+          <Key>
+            <PropertyRef Name="ResponseID" />
+          </Key>
+          <Property Name="ResponseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Submission">
+          <Key>
+            <PropertyRef Name="SubmissionID" />
+          </Key>
+          <Property Name="SubmissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Started" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Finished" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="TemplateID" />
+          </Key>
+          <Property Name="TemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Video" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TextQuestion">
+          <Key>
+            <PropertyRef Name="TextQuestionID" />
+          </Key>
+          <Property Name="TextQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WorkflowButtonID" Type="Int32" Nullable="false" />
+          <Property Name="Display" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VideoQuestion">
+          <Key>
+            <PropertyRef Name="VideoQuestionID" />
+          </Key>
+          <Property Name="VideoQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TextQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WorkflowButton">
+          <Key>
+            <PropertyRef Name="WorkflowButtonID" />
+          </Key>
+          <Property Name="WorkflowButtonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NextWorkflowQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="Display" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowQuestion">
+          <Key>
+            <PropertyRef Name="WorkflowQuestionID" />
+          </Key>
+          <Property Name="WorkflowQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Timeout" Type="Int32" Nullable="false" />
+          <Property Name="Display" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="WorkflowID" />
+          </Key>
+          <Property Name="WorkflowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocalModelStoreContainer" CdmEntityContainer="DB">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="LocalModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Started" ColumnName="Started" />
+                <ScalarProperty Name="Occurs" ColumnName="Occurs" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="LocalModel.Field">
+              <MappingFragment StoreEntitySet="Fields">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="RequiredID" ColumnName="RequiredID" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="LocalModel.Login">
+              <MappingFragment StoreEntitySet="Logins">
+                <ScalarProperty Name="Write" ColumnName="Write" />
+                <ScalarProperty Name="Read" ColumnName="Read" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requirements">
+            <EntityTypeMapping TypeName="LocalModel.Requirement">
+              <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="RequiredID" ColumnName="RequiredID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="LocalModel.Respons">
+              <MappingFragment StoreEntitySet="Responses">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Submissions">
+            <EntityTypeMapping TypeName="LocalModel.Submission">
+              <MappingFragment StoreEntitySet="Submissions">
+                <ScalarProperty Name="Finished" ColumnName="Finished" />
+                <ScalarProperty Name="Started" ColumnName="Started" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="SubmissionID" ColumnName="SubmissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="LocalModel.Template">
+              <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TextQuestions">
+            <EntityTypeMapping TypeName="LocalModel.TextQuestion">
+              <MappingFragment StoreEntitySet="TextQuestions">
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="WorkflowButtonID" ColumnName="WorkflowButtonID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TextQuestionID" ColumnName="TextQuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoQuestions">
+            <EntityTypeMapping TypeName="LocalModel.VideoQuestion">
+              <MappingFragment StoreEntitySet="VideoQuestions">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="TextQuestionID" ColumnName="TextQuestionID" />
+                <ScalarProperty Name="VideoQuestionID" ColumnName="VideoQuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowButtons">
+            <EntityTypeMapping TypeName="LocalModel.WorkflowButton">
+              <MappingFragment StoreEntitySet="WorkflowButtons">
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="NextWorkflowQuestionID" ColumnName="NextWorkflowQuestionID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkflowQuestionID" ColumnName="WorkflowQuestionID" />
+                <ScalarProperty Name="WorkflowButtonID" ColumnName="WorkflowButtonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowQuestions">
+            <EntityTypeMapping TypeName="LocalModel.WorkflowQuestion">
+              <MappingFragment StoreEntitySet="WorkflowQuestions">
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkflowQuestionID" ColumnName="WorkflowQuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="LocalModel.Workflow">
+              <MappingFragment StoreEntitySet="Workflows">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="WorkflowQuestionID" ColumnName="WorkflowQuestionID" />
+                <ScalarProperty Name="WorkflowID" ColumnName="WorkflowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

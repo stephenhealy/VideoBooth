@@ -131,6 +131,7 @@
             this.Controls.Add(this.lblHeader);
             this.Name = "frmLogin";
             this.Text = "1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -38,6 +38,9 @@
             // 
             // lblCounter
             // 
+            this.lblCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCounter.AutoSize = true;
             this.lblCounter.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCounter.Location = new System.Drawing.Point(316, 262);
@@ -48,6 +51,9 @@
             // 
             // lblCountdown
             // 
+            this.lblCountdown.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCountdown.AutoSize = true;
             this.lblCountdown.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountdown.Location = new System.Drawing.Point(188, 225);
@@ -58,10 +64,11 @@
             // 
             // btnRestart
             // 
+            this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRestart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRestart.Location = new System.Drawing.Point(347, 15);
             this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(116, 40);
+            this.btnRestart.Size = new System.Drawing.Size(116, 75);
             this.btnRestart.TabIndex = 19;
             this.btnRestart.Text = "Restart";
             this.btnRestart.UseVisualStyleBackColor = true;
@@ -72,7 +79,7 @@
             // 
             this.lblRespond.AutoSize = true;
             this.lblRespond.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRespond.Location = new System.Drawing.Point(20, 22);
+            this.lblRespond.Location = new System.Drawing.Point(20, 39);
             this.lblRespond.Name = "lblRespond";
             this.lblRespond.Size = new System.Drawing.Size(143, 25);
             this.lblRespond.TabIndex = 18;
@@ -81,10 +88,12 @@
             // 
             // btnDone
             // 
+            this.btnDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDone.ForeColor = System.Drawing.Color.Blue;
             this.btnDone.Location = new System.Drawing.Point(483, 15);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(182, 40);
+            this.btnDone.Size = new System.Drawing.Size(182, 75);
             this.btnDone.TabIndex = 17;
             this.btnDone.Text = "Done!";
             this.btnDone.UseVisualStyleBackColor = true;
@@ -93,16 +102,19 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(25, 68);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Location = new System.Drawing.Point(25, 113);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(640, 480);
+            this.panel1.Size = new System.Drawing.Size(640, 360);
             this.panel1.TabIndex = 22;
             // 
             // frmAnswer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 562);
+            this.ClientSize = new System.Drawing.Size(684, 492);
             this.Controls.Add(this.lblCounter);
             this.Controls.Add(this.lblCountdown);
             this.Controls.Add(this.btnRestart);

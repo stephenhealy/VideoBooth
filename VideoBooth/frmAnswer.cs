@@ -24,8 +24,8 @@ namespace VideoBooth
         private LiveJob _job { get; set; }
         private LiveDeviceSource _deviceSource { get; set; }
         private frmQuestion Question;
-        public int TemplateID { get; set; }
-        public int Number { get; set; }
+        public int EventID { get; set; }
+        public int QuestionID { get; set; }
         public frmAnswer(frmQuestion form)
         {
             InitializeComponent();

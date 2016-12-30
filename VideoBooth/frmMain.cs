@@ -1,4 +1,6 @@
 ﻿using Core;
+using Data;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,10 +24,10 @@ namespace VideoBooth
             InitializeComponent();
             Login = form;
 
+            // Setup form
             btnStop.Visible = false;
-            ddlTemplate.DisplayMember = "Text";
-            ddlTemplate.ValueMember = "Value";
-            ddlTemplate.Items.Add(new { Text = "Wedding (Bride/Groom)", Value = "123" });
+
+            common.DataBindDDL(ddlEvent, db.Events.Select(o => new NameID() { Name = o.Name, ID = o.EventID }).ToList());
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -36,22 +38,20 @@ namespace VideoBooth
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == "")
+            if (ddlEvent.SelectedIndex <= 0)
             {
-                MessageBox.Show("Enter an event name", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtName.Focus();
+                MessageBox.Show("Select an event", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ddlEvent.Focus();
             }
             else
             {
                 btnLogout.Enabled = false;
-                ddlTemplate.Enabled = false;
-                txtName.Enabled = false;
-                dtEvent.Enabled = false;
+                ddlEvent.Enabled = false;
                 btnStart.Enabled = false;
                 btnStop.Visible = true;
 
                 // Load the type of the event.
-                Event = new frmEvent();
+                Event = new frmEvent(Statics.ParseInt(common.GetDDL(ddlEvent)));
                 thread = new Thread(() => Application.Run(Event));
                 thread.SetApartmentState(ApartmentState.STA); // Deprecation Fix
                 thread.Start();
@@ -68,9 +68,7 @@ namespace VideoBooth
             thread.Abort();
 
             btnLogout.Enabled = true;
-            ddlTemplate.Enabled = true;
-            txtName.Enabled = true;
-            dtEvent.Enabled = true;
+            ddlEvent.Enabled = true;
             btnStart.Enabled = true;
             btnStop.Visible = false;
         }

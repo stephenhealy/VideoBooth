@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b703fa7d7afa47908347ac98e0bac829" Name="Diagram1">
+        <EntityTypeShape EntityType="LocalModel.Event" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LocalModel.Field" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LocalModel.Login" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LocalModel.Requirement" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LocalModel.Respons" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LocalModel.Submission" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LocalModel.Template" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LocalModel.TextQuestion" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="LocalModel.VideoQuestion" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="LocalModel.WorkflowButton" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LocalModel.WorkflowQuestion" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="LocalModel.Workflow" Width="1.5" PointX="6.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

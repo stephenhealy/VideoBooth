@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoBooth", "VideoBooth\Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{57C923BD-3C5F-4934-9059-D446178D12F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{0926AD2C-E9A0-4C49-B947-09E56CEBE2DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{F82BEBAB-C4A9-4E12-B6D3-77FBC7CD7349}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{57C923BD-3C5F-4934-9059-D446178D12F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C923BD-3C5F-4934-9059-D446178D12F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C923BD-3C5F-4934-9059-D446178D12F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0926AD2C-E9A0-4C49-B947-09E56CEBE2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0926AD2C-E9A0-4C49-B947-09E56CEBE2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0926AD2C-E9A0-4C49-B947-09E56CEBE2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0926AD2C-E9A0-4C49-B947-09E56CEBE2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82BEBAB-C4A9-4E12-B6D3-77FBC7CD7349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82BEBAB-C4A9-4E12-B6D3-77FBC7CD7349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82BEBAB-C4A9-4E12-B6D3-77FBC7CD7349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82BEBAB-C4A9-4E12-B6D3-77FBC7CD7349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
