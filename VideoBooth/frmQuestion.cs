@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,22 +20,37 @@ namespace VideoBooth
         public int WorkflowButtonID { get; set; }
         public int QuestionID { get; set; }
         public int Display { get; set; }
+        public bool Save { get; set; }
+
         public frmQuestion(frmEvent form)
         {
             InitializeComponent();
             Event = form;
+            Save = false;
         }
 
-        public bool LoadVideo()
+        public bool Next(bool fromEvent)
         {
             bool Questions = true;
             // Using the template and number, get the video and play.
             List<Data.TextQuestion> questions = db.TextQuestions.Where(o => o.WorkflowButtonID == WorkflowButtonID).OrderBy(o => o.Display).ToList();
             lblQuestion.Text = "Question # " + Display.ToString() + " of " + questions.Count.ToString() + "...";
 
-            if (questions.Count <= Display) 
+            if (questions.Count == 0)
             {
-                int Skip = Display - 1;
+                if (fromEvent)
+                {
+                    // There are no questions - show message and return to close.
+                    MessageBox.Show("There are no questions prepared for the selection you made. Please try again.", "Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Questions = false;
+                }
+                else
+                {
+                    string temp = "";
+                }
+            }
+            else if (questions.Count >= Display) 
+            {
                 Data.TextQuestion question = questions.Skip(Display - 1).FirstOrDefault();
                 if (question != null)
                 {
@@ -55,13 +71,13 @@ namespace VideoBooth
                 }
                 else
                 {
-                    MessageBox.Show("There are no questions prepared for the selection you made. Please try again.", "Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Questions = false;
+                    MessageBox.Show("There was a problem with the question. (" + Display.ToString() + ")", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 // Save the submission.
+                Questions = false;
             }
             return Questions;
         }
@@ -71,38 +87,49 @@ namespace VideoBooth
             // Send to answer
             plyMedia.close();
             this.Hide();
+
             // Since we are always closing the form, always create a new one
             Answer = new frmAnswer(this);
-            Answer.EventID = EventID;
-            Answer.QuestionID = QuestionID;
-            Answer.LoadWebcam(true);
             Answer.Show();
             Answer.Focus();
+            Answer.EventID = EventID;
+            Answer.QuestionID = QuestionID;
+            Answer.LoadHelp();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             // Send back to event options
-            Event.Back();
+            Event.Back(Save);
         }
 
         private void btnSkip_Click(object sender, EventArgs e)
         {
-            Skip();
+            bool More = Skip();
+            if (More == false)
+                Event.Back(Save);
         }
 
-        public void Skip()
+        public bool Skip()
         {
             Display++;
-            LoadVideo();
+            return Next(false);
         }
 
         public void Back()
         {
-            // From the answer...will advance to next question
-            Skip();
-            Show();
-            Focus();
+            // From the answer...will advance to next question or save and return.
+            Save = true;
+            bool More = Skip();
+            if (More)
+            {
+                Show();
+                Focus();
+            }
+            else
+            {
+                Event.Back(Save);
+            }
             // Always close the form
             Answer.Close();
         }

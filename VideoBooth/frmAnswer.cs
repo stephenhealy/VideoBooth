@@ -13,8 +13,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VideoBooth.Properties;
 
 namespace VideoBooth
 {
@@ -26,25 +28,40 @@ namespace VideoBooth
         private frmQuestion Question;
         public int EventID { get; set; }
         public int QuestionID { get; set; }
+        private Thread workerThread = null;
+        private bool turnOn { get; set; }
+        // Declare a delegate used to communicate with the UI thread
+        private delegate void UpdateWebcamLoaded();
+        private UpdateWebcamLoaded updateWebcamLoaded = null;
+
         public frmAnswer(frmQuestion form)
         {
             InitializeComponent();
             Question = form;
+            picArrow.Image = Resources.arrow;
+            turnOn = true;
+
+            // Initialise the delegate
+            this.updateWebcamLoaded = new UpdateWebcamLoaded(this.WebcamLoaded);
         }
 
-        public void LoadWebcam(bool turnon)
+        public void LoadHelp()
         {
-            lblCounter.Text = "3";
-            Timer = new System.Windows.Forms.Timer();
-            Timer.Tick += new EventHandler(timer_Tick);
-            Timer.Interval = 1000; // 1 second
-            Timer.Start();
-            ShowHide(false);
-            SaveFileDialog saveAVI = new SaveFileDialog();
-            saveAVI.Filter = "AVI Files (*.avi)|*.avi";
+            StartCountdown();
+        }
 
-            if (turnon)
+        public void StartCountdown()
+        {
+            // Initialise and start worker thread
+            this.workerThread = new Thread(new ThreadStart(this.LoadWebcam));
+            this.workerThread.Start();
+        }
+
+        public void LoadWebcam()
+        {
+            if (turnOn)
             {
+                turnOn = false;
                 var videoDevices = EncoderDevices.FindDevices(EncoderDeviceType.Video);
                 EncoderDevice video = videoDevices[1];
                 var audioDevices = EncoderDevices.FindDevices(EncoderDeviceType.Audio);
@@ -60,12 +77,49 @@ namespace VideoBooth
                 _job.OutputFormat.VideoProfile.Size = framesize;
                 _job.OutputFormat.VideoProfile.Bitrate = new ConstantBitrate(15000);
                 // Sets preview window to winform panel hosted by xaml window
-                _deviceSource.PreviewWindow = new PreviewWindow(new HandleRef(panel1, panel1.Handle));
+                //_deviceSource.PreviewWindow = new PreviewWindow(new HandleRef(panPreview, panPreview.Handle));
                 // Make this source the active one
                 _job.ActivateSource(_deviceSource);
+            }
 
+            // Show progress
+            this.Invoke(this.updateWebcamLoaded);
+            this.workerThread.Abort();
+        }
 
-                /* START RECORDING */
+        private void WebcamLoaded()
+        {
+            // Once webcam is loaded.
+            this.lblNow.Text = "Respond Now!";
+
+            ShowHide(false);
+            lblCounter.Text = "5";
+            Timer = new System.Windows.Forms.Timer();
+            Timer.Tick += new EventHandler(timer_Tick);
+            Timer.Interval = 1000; // 1 second
+            Timer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            int counter = Int32.Parse(lblCounter.Text);
+            counter--;
+            if (counter == 0)
+            {
+                Timer.Stop();
+                ShowHide(true);
+                lblCounter.Text = "RESPOND NOW!!";
+
+                StartRecording();
+            }
+            else
+                lblCounter.Text = counter.ToString();
+        }
+
+        private void StartRecording()
+        {
+            if (Demo == false)
+            {
                 // Sets up publishing format for file archival type
                 FileArchivePublishFormat fileOut = new FileArchivePublishFormat();
                 fileOut.OutputFileName = String.Format("C:\\Users\\Steve\\Videos\\WebCam{0:yyyyMMdd_hhmmss}.wmv", DateTime.Now);
@@ -77,22 +131,18 @@ namespace VideoBooth
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void StopRecording()
         {
-            int counter = Int32.Parse(lblCounter.Text);
-            counter--;
-            if (counter == 0)
+            if (Demo == false)
             {
-                Timer.Stop();
-                ShowHide(true);
+                _job.StopEncoding();
             }
-            lblCounter.Text = counter.ToString();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            /* STOP RECORDING */
-            _job.StopEncoding();
+            StopRecording();
+
             // Remove the Device Source and destroy the job
             _job.RemoveDeviceSource(_deviceSource);
             // Destroy the device source
@@ -105,12 +155,14 @@ namespace VideoBooth
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
-            LoadWebcam(false);
+            StopRecording();
+            StartCountdown();
         }
         private void ShowHide(bool loading)
         {
             lblCounter.Visible = lblCountdown.Visible = !loading;
-            lblRespond.Visible = btnDone.Visible = btnRestart.Visible = panel1.Visible = loading;
+            lblNow.Visible = btnDone.Visible = btnRestart.Visible = panPreview.Visible = loading;
+            panPreview.Visible = false;
         }
 
 

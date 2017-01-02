@@ -40,49 +40,56 @@
             // btnSkip
             // 
             this.btnSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSkip.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSkip.BackColor = System.Drawing.Color.White;
+            this.btnSkip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSkip.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSkip.ForeColor = System.Drawing.Color.Black;
             this.btnSkip.Location = new System.Drawing.Point(473, 15);
             this.btnSkip.Name = "btnSkip";
-            this.btnSkip.Size = new System.Drawing.Size(87, 75);
+            this.btnSkip.Size = new System.Drawing.Size(87, 60);
             this.btnSkip.TabIndex = 16;
             this.btnSkip.Text = "Skip";
-            this.btnSkip.UseVisualStyleBackColor = true;
+            this.btnSkip.UseVisualStyleBackColor = false;
             this.btnSkip.Click += new System.EventHandler(this.btnSkip_Click);
             // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.Color.Red;
+            this.btnExit.BackColor = System.Drawing.Color.White;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnExit.Location = new System.Drawing.Point(576, 15);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(87, 75);
+            this.btnExit.Size = new System.Drawing.Size(87, 60);
             this.btnExit.TabIndex = 15;
             this.btnExit.Text = "Quit";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblQuestion
             // 
             this.lblQuestion.AutoSize = true;
-            this.lblQuestion.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuestion.Location = new System.Drawing.Point(12, 39);
+            this.lblQuestion.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestion.Location = new System.Drawing.Point(12, 33);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(175, 25);
+            this.lblQuestion.Size = new System.Drawing.Size(176, 22);
             this.lblQuestion.TabIndex = 14;
             this.lblQuestion.Text = "Question # 1 of 13";
             // 
             // btnReady
             // 
             this.btnReady.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReady.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReady.ForeColor = System.Drawing.Color.Blue;
+            this.btnReady.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnReady.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReady.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReady.ForeColor = System.Drawing.Color.White;
             this.btnReady.Location = new System.Drawing.Point(263, 15);
             this.btnReady.Name = "btnReady";
-            this.btnReady.Size = new System.Drawing.Size(191, 75);
+            this.btnReady.Size = new System.Drawing.Size(191, 60);
             this.btnReady.TabIndex = 13;
             this.btnReady.Text = "Ready to Respond";
-            this.btnReady.UseVisualStyleBackColor = true;
+            this.btnReady.UseVisualStyleBackColor = false;
             this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
             // 
             // plyMedia

@@ -1,7 +1,9 @@
-﻿using Data;
+﻿using Core;
+using Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -15,9 +17,12 @@ namespace VideoBooth
     {
         public Common common { get; set; }
         public DB db { get; set; }
+        public bool Demo { get; set; }
+
         public CustomForm()
         {
             ControlBox = false;
+            Demo = Statics.ParseBool(ConfigurationManager.AppSettings["Demo"]);
 
             common = new Common();
             db = new DB();
