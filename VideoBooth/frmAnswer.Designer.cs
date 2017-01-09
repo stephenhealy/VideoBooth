@@ -36,6 +36,7 @@
             this.panPreview = new System.Windows.Forms.Panel();
             this.lblNow = new System.Windows.Forms.Label();
             this.picArrow = new System.Windows.Forms.PictureBox();
+            this.lblTimer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picArrow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,9 +46,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCountdown.AutoSize = true;
             this.lblCountdown.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCountdown.Location = new System.Drawing.Point(175, 29);
+            this.lblCountdown.Location = new System.Drawing.Point(233, 36);
+            this.lblCountdown.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCountdown.Name = "lblCountdown";
-            this.lblCountdown.Size = new System.Drawing.Size(334, 32);
+            this.lblCountdown.Size = new System.Drawing.Size(406, 40);
             this.lblCountdown.TabIndex = 20;
             this.lblCountdown.Text = "Get ready to answer in...";
             this.lblCountdown.Visible = false;
@@ -57,9 +59,10 @@
             this.lblLook.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblLook.AutoSize = true;
             this.lblLook.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLook.Location = new System.Drawing.Point(232, 418);
+            this.lblLook.Location = new System.Drawing.Point(309, 514);
+            this.lblLook.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLook.Name = "lblLook";
-            this.lblLook.Size = new System.Drawing.Size(219, 20);
+            this.lblLook.Size = new System.Drawing.Size(273, 24);
             this.lblLook.TabIndex = 18;
             this.lblLook.Text = "Don\'t forget to look at the camera!";
             // 
@@ -69,9 +72,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCounter.AutoSize = true;
             this.lblCounter.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCounter.Location = new System.Drawing.Point(308, 75);
+            this.lblCounter.Location = new System.Drawing.Point(411, 92);
+            this.lblCounter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCounter.Name = "lblCounter";
-            this.lblCounter.Size = new System.Drawing.Size(68, 75);
+            this.lblCounter.Size = new System.Drawing.Size(84, 93);
             this.lblCounter.TabIndex = 21;
             this.lblCounter.Text = "5";
             this.lblCounter.Visible = false;
@@ -84,9 +88,10 @@
             this.btnRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestart.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRestart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnRestart.Location = new System.Drawing.Point(132, 193);
+            this.btnRestart.Location = new System.Drawing.Point(176, 238);
+            this.btnRestart.Margin = new System.Windows.Forms.Padding(4);
             this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(421, 75);
+            this.btnRestart.Size = new System.Drawing.Size(561, 92);
             this.btnRestart.TabIndex = 19;
             this.btnRestart.Text = "Start Over";
             this.btnRestart.UseVisualStyleBackColor = false;
@@ -101,9 +106,10 @@
             this.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDone.Font = new System.Drawing.Font("Arial Black", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDone.ForeColor = System.Drawing.Color.White;
-            this.btnDone.Location = new System.Drawing.Point(132, 288);
+            this.btnDone.Location = new System.Drawing.Point(176, 354);
+            this.btnDone.Margin = new System.Windows.Forms.Padding(4);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(421, 111);
+            this.btnDone.Size = new System.Drawing.Size(561, 137);
             this.btnDone.TabIndex = 17;
             this.btnDone.Text = "DONE!";
             this.btnDone.UseVisualStyleBackColor = false;
@@ -115,9 +121,10 @@
             this.panPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panPreview.Location = new System.Drawing.Point(630, 441);
+            this.panPreview.Location = new System.Drawing.Point(840, 543);
+            this.panPreview.Margin = new System.Windows.Forms.Padding(4);
             this.panPreview.Name = "panPreview";
-            this.panPreview.Size = new System.Drawing.Size(35, 32);
+            this.panPreview.Size = new System.Drawing.Size(47, 39);
             this.panPreview.TabIndex = 22;
             this.panPreview.Visible = false;
             // 
@@ -127,9 +134,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNow.AutoSize = true;
             this.lblNow.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNow.Location = new System.Drawing.Point(130, 44);
+            this.lblNow.Location = new System.Drawing.Point(173, 54);
+            this.lblNow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNow.Name = "lblNow";
-            this.lblNow.Size = new System.Drawing.Size(424, 75);
+            this.lblNow.Size = new System.Drawing.Size(528, 93);
             this.lblNow.TabIndex = 23;
             this.lblNow.Text = "Starting up...";
             // 
@@ -137,18 +145,33 @@
             // 
             this.picArrow.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.picArrow.ImageLocation = "";
-            this.picArrow.Location = new System.Drawing.Point(326, 441);
+            this.picArrow.Location = new System.Drawing.Point(435, 543);
+            this.picArrow.Margin = new System.Windows.Forms.Padding(4);
             this.picArrow.Name = "picArrow";
-            this.picArrow.Size = new System.Drawing.Size(33, 50);
+            this.picArrow.Size = new System.Drawing.Size(44, 62);
             this.picArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picArrow.TabIndex = 24;
             this.picArrow.TabStop = false;
             // 
+            // lblTimer
+            // 
+            this.lblTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.Location = new System.Drawing.Point(13, 581);
+            this.lblTimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(43, 16);
+            this.lblTimer.TabIndex = 25;
+            this.lblTimer.Text = "Timer";
+            this.lblTimer.Visible = false;
+            // 
             // frmAnswer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 492);
+            this.ClientSize = new System.Drawing.Size(912, 606);
+            this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.picArrow);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.lblCountdown);
@@ -157,8 +180,10 @@
             this.Controls.Add(this.lblLook);
             this.Controls.Add(this.lblCounter);
             this.Controls.Add(this.lblNow);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmAnswer";
             this.Text = "Respond";
+            this.Load += new System.EventHandler(this.frmAnswer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picArrow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -175,5 +200,6 @@
         private System.Windows.Forms.Panel panPreview;
         private System.Windows.Forms.Label lblNow;
         private System.Windows.Forms.PictureBox picArrow;
+        private System.Windows.Forms.Label lblTimer;
     }
 }

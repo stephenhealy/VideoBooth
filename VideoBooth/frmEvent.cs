@@ -13,22 +13,32 @@ namespace VideoBooth
 {
     public partial class frmEvent : CustomForm
     {
-        private System.Windows.Forms.Timer Timer;
+        private frmMain Main { get; set; }
         private frmQuestion Question { get; set; }
         private List<OptionButton> Buttons { get; set; }
         private int EventID { get; set; }
-        private int Counter { get; set; }
         private Data.WorkflowQuestion initial { get; set; }
+        // Counter for thanks to appear and then hide
+        private System.Windows.Forms.Timer TimerThanks;
+        private int CounterThanks { get; set; }
+        // Counter for abandonement
+        private System.Windows.Forms.Timer TimerAbandon;
+        private int CounterAbandon { get; set; }
 
-        public frmEvent(int eventID)
+        public frmEvent(frmMain form, int eventID, string screenName, bool maximize)
         {
             InitializeComponent();
+            Main = form;
             EventID = eventID;
+            ScreenName = screenName;
+            Maximized = maximize;
         }
 
         private void frmEvent_Load(object sender, EventArgs e)
         {
             LoadEvents();
+            SetScreen();
+            lblTimer.Visible = ShowTimers;
         }
 
         public void LoadEvents()
@@ -48,6 +58,7 @@ namespace VideoBooth
 
         public void LoadWorkflowQuestion(Data.WorkflowQuestion question)
         {
+            SetAbandonTimer();
             if (question != null)
             {
                 if (initial == null)
@@ -135,11 +146,11 @@ namespace VideoBooth
                 lblOptions.Visible = false;
                 lblSaved.Visible = lblThanks.Visible = lblInformation.Visible = true;
 
-                Counter = 10;
-                Timer = new System.Windows.Forms.Timer();
-                Timer.Tick += new EventHandler(timer_Tick);
-                Timer.Interval = 1000; // 1 second
-                Timer.Start();
+                CounterThanks = 10;     // Wait 10 seconds
+                TimerThanks = new System.Windows.Forms.Timer();
+                TimerThanks.Tick += new EventHandler(timerThanks_Tick);
+                TimerThanks.Interval = 1000; // 1 second
+                TimerThanks.Start();
             }
             else
             {
@@ -152,12 +163,12 @@ namespace VideoBooth
             Question.Close();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void timerThanks_Tick(object sender, EventArgs e)
         {
-            Counter--;
-            if (Counter == 0)
+            CounterThanks--;
+            if (CounterThanks == 0)
             {
-                Timer.Stop();
+                TimerThanks.Stop();
                 lblOptions.Visible = true;
                 lblSaved.Visible = lblThanks.Visible = lblInformation.Visible = false;
                 // Go back to first question
@@ -178,6 +189,7 @@ namespace VideoBooth
                         if (button.NextWorkflowQuestionID > 0)
                         {
                             LoadWorkflowQuestion(db.WorkflowQuestions.FirstOrDefault(o => o.WorkflowQuestionID == button.NextWorkflowQuestionID));
+                            SetAbandonTimer();
                         }
                         else
                         {
@@ -224,6 +236,49 @@ namespace VideoBooth
 
             int MaxSize = Width - 41 - 12;
             lblOptions.MaximumSize = new Size(MaxSize, 0);
+            lblInformation.MaximumSize = new Size(MaxSize, 0);
+        }
+
+        public void StopAbandonTimer()
+        {
+            if (TimerAbandon != null)
+                TimerAbandon.Stop();
+        }
+
+        public void SetAbandonTimer()
+        {
+            StopAbandonTimer();
+            CounterAbandon = 10;     // Wait 10 seconds
+            TimerAbandon = new System.Windows.Forms.Timer();
+            TimerAbandon.Tick += new EventHandler(timerAbandon_Tick);
+            TimerAbandon.Interval = 1000; // 1 second
+            TimerAbandon.Start();
+        }
+
+        private void timerAbandon_Tick(object sender, EventArgs e)
+        {
+            CounterAbandon--;
+            SetTimer(CounterAbandon);
+            if (CounterAbandon == 0)
+            {
+                TimerAbandon.Stop();
+                // Always close the frm
+                if (Question != null)
+                {
+                    Question.Close();
+                    Show();
+                    Focus();
+                }
+                // Go back to first question
+                LoadWorkflowQuestion(initial);
+            }
+        }
+
+        public void SetTimer(int timer)
+        {
+            lblTimer.Text = "Timer = " + timer.ToString();
+            if (Question != null)
+                Question.SetTimer(timer);
         }
     }
 }

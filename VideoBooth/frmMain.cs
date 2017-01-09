@@ -19,6 +19,7 @@ namespace VideoBooth
         private Thread thread { get; set; }
         private frmEvent Event { get; set; }
         private frmLogin Login { get; set; }
+
         public frmMain(frmLogin form)
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace VideoBooth
             btnStop.Visible = false;
 
             common.DataBindDDL(ddlEvent, db.Events.Select(o => new NameID() { Name = o.Name, ID = o.EventID }).ToList());
+            common.DataBindDDL(ddlScreen, Screen.AllScreens.Select(o => new TextValue() { Text = o.DeviceName, Value = o.DeviceName }).ToList());
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -45,20 +47,33 @@ namespace VideoBooth
             }
             else
             {
+                StartEvent();
                 btnLogout.Enabled = false;
                 ddlEvent.Enabled = false;
                 btnStart.Enabled = false;
                 btnStop.Visible = true;
-
-                // Load the type of the event.
-                Event = new frmEvent(Statics.ParseInt(common.GetDDL(ddlEvent)));
-                thread = new Thread(() => Application.Run(Event));
-                thread.SetApartmentState(ApartmentState.STA); // Deprecation Fix
-                thread.Start();
             }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
+        {
+            StopEvent();
+            btnLogout.Enabled = true;
+            ddlEvent.Enabled = true;
+            btnStart.Enabled = true;
+            btnStop.Visible = false;
+        }
+
+        private void StartEvent()
+        {
+            // Load the type of the event.
+            Event = new frmEvent(this, Statics.ParseInt(common.GetDDL(ddlEvent)), common.GetDDL(ddlScreen), chkMaximize.Checked);
+            thread = new Thread(() => Application.Run(Event));
+            thread.SetApartmentState(ApartmentState.STA); // Deprecation Fix
+            thread.Start();
+        }
+
+        private void StopEvent()
         {
             this.Invoke((MethodInvoker)delegate
             {
@@ -66,12 +81,6 @@ namespace VideoBooth
                 Event.Close();
             });
             thread.Abort();
-
-            btnLogout.Enabled = true;
-            ddlEvent.Enabled = true;
-            btnStart.Enabled = true;
-            btnStop.Visible = false;
         }
-
     }
 }

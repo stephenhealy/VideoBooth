@@ -26,11 +26,20 @@ namespace VideoBooth
         {
             InitializeComponent();
             Event = form;
+            ScreenName = form.ScreenName;
+            Maximized = form.Maximized;
+        }
+
+        private void frmQuestion_Load(object sender, EventArgs e)
+        {
             Save = false;
+            SetScreen();
+            lblTimer.Visible = ShowTimers;
         }
 
         public bool Next(bool fromEvent)
         {
+            Event.SetAbandonTimer();
             bool Questions = true;
             // Using the template and number, get the video and play.
             List<Data.TextQuestion> questions = db.TextQuestions.Where(o => o.WorkflowButtonID == WorkflowButtonID).OrderBy(o => o.Display).ToList();
@@ -63,10 +72,12 @@ namespace VideoBooth
                         plyMedia.URL = file;
                         plyMedia.uiMode = "none";
                         plyMedia.settings.autoStart = true;
+                        lblText.Visible = false;
                     }
                     else
                     {
-                        MessageBox.Show(question.Question);
+                        plyMedia.Visible = false;
+                        lblText.Text = question.Question;
                     }
                 }
                 else
@@ -95,6 +106,7 @@ namespace VideoBooth
             Answer.EventID = EventID;
             Answer.QuestionID = QuestionID;
             Answer.LoadHelp();
+            Event.StopAbandonTimer();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -132,6 +144,32 @@ namespace VideoBooth
             }
             // Always close the form
             Answer.Close();
+        }
+
+        private void frmQuestion_Resize(object sender, EventArgs e)
+        {
+            int Width = this.ClientSize.Width;
+            int Height = this.ClientSize.Height;
+            
+            int Video = Width - 17 - 17;        // give 17px on each side for buffer
+            // Dimension needs to be 16:9 aspect ratio
+            int Quotient = Video / 16;      // if 1280 = 80 (will round down)
+            int NewHeight = Quotient * 9;   // if 1280 = 720
+            plyMedia.Size = new Size(Video, NewHeight);
+
+            // Starts at 12
+            // Button is at 509 (700 - 150 - 41)
+            // 509 - 12 = 497 (give 12 px buffer to front of button)
+
+            int MaxSize = Width - 41 - 12;
+            lblText.MaximumSize = new Size(MaxSize, 0);
+        }
+
+        public void SetTimer(int timer)
+        {
+            lblTimer.Text = "Timer = " + timer.ToString();
+            if (Answer != null)
+                Answer.SetTimer(timer);
         }
     }
 }

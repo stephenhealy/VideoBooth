@@ -39,6 +39,9 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.lblScreen = new System.Windows.Forms.Label();
+            this.ddlScreen = new System.Windows.Forms.ComboBox();
+            this.chkMaximize = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnStop
@@ -47,8 +50,8 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(213, 298);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStop.Location = new System.Drawing.Point(213, 370);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(333, 49);
             this.btnStop.TabIndex = 34;
@@ -62,7 +65,7 @@
             this.ddlEvent.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlEvent.FormattingEnabled = true;
             this.ddlEvent.Location = new System.Drawing.Point(213, 169);
-            this.ddlEvent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlEvent.Margin = new System.Windows.Forms.Padding(4);
             this.ddlEvent.Name = "ddlEvent";
             this.ddlEvent.Size = new System.Drawing.Size(332, 31);
             this.ddlEvent.TabIndex = 32;
@@ -139,8 +142,8 @@
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.ForeColor = System.Drawing.Color.Green;
-            this.btnStart.Location = new System.Drawing.Point(213, 241);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStart.Location = new System.Drawing.Point(213, 313);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(333, 49);
             this.btnStart.TabIndex = 22;
@@ -155,7 +158,7 @@
             this.btnLogout.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.Black;
             this.btnLogout.Location = new System.Drawing.Point(585, 16);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(133, 49);
             this.btnLogout.TabIndex = 21;
@@ -167,18 +170,53 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(208, 208);
+            this.label6.Location = new System.Drawing.Point(210, 210);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(465, 17);
             this.label6.TabIndex = 35;
             this.label6.Text = "In the future, this should be changed to a file browse to import the data.";
             // 
+            // lblScreen
+            // 
+            this.lblScreen.AutoSize = true;
+            this.lblScreen.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScreen.Location = new System.Drawing.Point(47, 242);
+            this.lblScreen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblScreen.Name = "lblScreen";
+            this.lblScreen.Size = new System.Drawing.Size(145, 23);
+            this.lblScreen.TabIndex = 36;
+            this.lblScreen.Text = "Select Screen :";
+            // 
+            // ddlScreen
+            // 
+            this.ddlScreen.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddlScreen.FormattingEnabled = true;
+            this.ddlScreen.Location = new System.Drawing.Point(211, 239);
+            this.ddlScreen.Margin = new System.Windows.Forms.Padding(4);
+            this.ddlScreen.Name = "ddlScreen";
+            this.ddlScreen.Size = new System.Drawing.Size(332, 31);
+            this.ddlScreen.TabIndex = 38;
+            // 
+            // chkMaximize
+            // 
+            this.chkMaximize.AutoSize = true;
+            this.chkMaximize.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkMaximize.Location = new System.Drawing.Point(213, 277);
+            this.chkMaximize.Name = "chkMaximize";
+            this.chkMaximize.Size = new System.Drawing.Size(162, 23);
+            this.chkMaximize.TabIndex = 39;
+            this.chkMaximize.Text = "Maximize on open";
+            this.chkMaximize.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 374);
+            this.ClientSize = new System.Drawing.Size(735, 433);
+            this.Controls.Add(this.chkMaximize);
+            this.Controls.Add(this.ddlScreen);
+            this.Controls.Add(this.lblScreen);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.ddlEvent);
@@ -190,7 +228,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnLogout);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.Text = "Video Booth";
             this.ResumeLayout(false);
@@ -211,5 +249,8 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblScreen;
+        private System.Windows.Forms.ComboBox ddlScreen;
+        private System.Windows.Forms.CheckBox chkMaximize;
     }
 }

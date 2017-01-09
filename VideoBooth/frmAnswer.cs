@@ -38,8 +38,16 @@ namespace VideoBooth
         {
             InitializeComponent();
             Question = form;
+            ScreenName = form.ScreenName;
+            Maximized = form.Maximized;
+        }
+
+        private void frmAnswer_Load(object sender, EventArgs e)
+        {
             picArrow.Image = Resources.arrow;
             turnOn = true;
+            SetScreen();
+            lblTimer.Visible = ShowTimers;
 
             // Initialise the delegate
             this.updateWebcamLoaded = new UpdateWebcamLoaded(this.WebcamLoaded);
@@ -66,20 +74,27 @@ namespace VideoBooth
                 EncoderDevice video = videoDevices[1];
                 var audioDevices = EncoderDevices.FindDevices(EncoderDeviceType.Audio);
                 EncoderDevice audio = audioDevices[0];
-                // Starts new job for preview window
-                _job = new LiveJob();
-                // Create a new device source. We use the first audio and video devices on the system
-                _deviceSource = _job.AddDeviceSource(video, audio);
-                // Set video format options
-                Size framesize = new Size(640, 480);
-                //Size framesize = new Size(1280, 720);
-                _deviceSource.PickBestVideoFormat(framesize, 60);
-                _job.OutputFormat.VideoProfile.Size = framesize;
-                _job.OutputFormat.VideoProfile.Bitrate = new ConstantBitrate(15000);
-                // Sets preview window to winform panel hosted by xaml window
-                //_deviceSource.PreviewWindow = new PreviewWindow(new HandleRef(panPreview, panPreview.Handle));
-                // Make this source the active one
-                _job.ActivateSource(_deviceSource);
+                try
+                {
+                    // Starts new job for preview window
+                    _job = new LiveJob();
+                    // Create a new device source. We use the first audio and video devices on the system
+                    _deviceSource = _job.AddDeviceSource(video, audio);
+                    // Set video format options
+                    Size framesize = new Size(640, 480);
+                    //Size framesize = new Size(1280, 720);
+                    _deviceSource.PickBestVideoFormat(framesize, 60);
+                    _job.OutputFormat.VideoProfile.Size = framesize;
+                    _job.OutputFormat.VideoProfile.Bitrate = new ConstantBitrate(15000);
+                    // Sets preview window to winform panel hosted by xaml window
+                    //_deviceSource.PreviewWindow = new PreviewWindow(new HandleRef(panPreview, panPreview.Handle));
+                    // Make this source the active one
+                    _job.ActivateSource(_deviceSource);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
 
             // Show progress
@@ -165,6 +180,10 @@ namespace VideoBooth
             panPreview.Visible = false;
         }
 
+        public void SetTimer(int timer)
+        {
+            lblTimer.Text = "Timer = " + timer.ToString();
+        }
 
 
 
