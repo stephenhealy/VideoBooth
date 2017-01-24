@@ -23,8 +23,9 @@ namespace VideoBooth
         {
             // Send to the main menu
             this.Hide();
-            if (Main == null)
-                Main = new frmMain(this);
+
+            // Since we are always closing the form, always create a new one
+            Main = new frmMain(this);
             Main.Show();
             Main.Focus();
         }

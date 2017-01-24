@@ -1,5 +1,6 @@
 ﻿using Core;
 using ICSharpCode.SharpZipLib.Zip;
+using Microsoft.Expression.Encoder;
 using Microsoft.Expression.Encoder.Devices;
 using Microsoft.Expression.Encoder.Live;
 using Microsoft.Expression.Encoder.Profiles;
@@ -70,31 +71,57 @@ namespace VideoBooth
             if (turnOn)
             {
                 turnOn = false;
+                EncoderDevice video = null;
                 var videoDevices = EncoderDevices.FindDevices(EncoderDeviceType.Video);
-                EncoderDevice video = videoDevices[1];
+                foreach (var videoDevice in videoDevices)
+                {
+                    if (videoDevice.Name == "HD Pro Webcam C920")
+                    {
+                        video = videoDevice;
+                        break;
+                    }
+                }
+                EncoderDevice audio = null;
                 var audioDevices = EncoderDevices.FindDevices(EncoderDeviceType.Audio);
-                EncoderDevice audio = audioDevices[0];
-                try
+                foreach (var audioDevice in audioDevices)
                 {
-                    // Starts new job for preview window
-                    _job = new LiveJob();
-                    // Create a new device source. We use the first audio and video devices on the system
-                    _deviceSource = _job.AddDeviceSource(video, audio);
-                    // Set video format options
-                    Size framesize = new Size(640, 480);
-                    //Size framesize = new Size(1280, 720);
-                    _deviceSource.PickBestVideoFormat(framesize, 60);
-                    _job.OutputFormat.VideoProfile.Size = framesize;
-                    _job.OutputFormat.VideoProfile.Bitrate = new ConstantBitrate(15000);
-                    // Sets preview window to winform panel hosted by xaml window
-                    //_deviceSource.PreviewWindow = new PreviewWindow(new HandleRef(panPreview, panPreview.Handle));
-                    // Make this source the active one
-                    _job.ActivateSource(_deviceSource);
+                    if (audioDevice.Name == "Microphone (HD Pro Webcam C920)")
+                    {
+                        audio = audioDevice;
+                        break;
+                    }
                 }
-                catch (Exception ex)
-                {
+                //EncoderDevice audio = audioDevices[1];
 
+                if (video != null && audio != null)
+                {
+                    try
+                    {
+                        // Starts new job for preview window
+                        _job = new LiveJob();
+                        // Create a new device source. We use the first audio and video devices on the system
+                        _deviceSource = _job.AddDeviceSource(video, audio);
+                        // Set video format options
+                        //Size framesize = new Size(640, 480);
+                        Size framesize = new Size(1280, 720);
+                        _deviceSource.PickBestVideoFormat(framesize, 60);
+                        //_job.ApplyPreset(LivePresets.H264IISSmoothStreaming720pWidescreen);
+                        _job.OutputFormat.VideoProfile.Size = framesize;
+                        _job.OutputFormat.VideoProfile.FrameRate = 60;
+                        _job.OutputFormat.VideoProfile.Bitrate = new ConstantBitrate(15000);
+
+                        // Sets preview window to winform panel hosted by xaml window
+                        //_deviceSource.PreviewWindow = new PreviewWindow(new HandleRef(panPreview, panPreview.Handle));
+                        // Make this source the active one
+                        _job.ActivateSource(_deviceSource);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
+                else
+                    MessageBox.Show("Could not find a video or audio device.", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             // Show progress

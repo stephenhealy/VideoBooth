@@ -39,6 +39,7 @@ namespace VideoBooth
             LoadEvents();
             SetScreen();
             lblTimer.Visible = ShowTimers;
+            DoResize();
         }
 
         public void LoadEvents()
@@ -227,6 +228,11 @@ namespace VideoBooth
 
         private void frmEvent_Resize(object sender, EventArgs e)
         {
+            DoResize();
+        }
+
+        private void DoResize()
+        {
             int Width = this.ClientSize.Width;
             int Height = this.ClientSize.Height;
 
@@ -234,7 +240,7 @@ namespace VideoBooth
             // Button is at 509 (700 - 150 - 41)
             // 509 - 12 = 497 (give 12 px buffer to front of button)
 
-            int MaxSize = Width - 41 - 12;
+            int MaxSize = Width - 12 - 12;
             lblOptions.MaximumSize = new Size(MaxSize, 0);
             lblInformation.MaximumSize = new Size(MaxSize, 0);
         }
